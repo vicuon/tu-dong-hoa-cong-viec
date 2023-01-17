@@ -1,5 +1,7 @@
 # lấy thông tin các file trong thư mục do người dùng lựa chọn
-
+# đưa thông tin vào ô A3 và A4 trang excel đang mở
+# A3: thông tin đường dẫn chứa file
+# A4: số lượng file trong thư mục
 import datetime
 import os
 import time
