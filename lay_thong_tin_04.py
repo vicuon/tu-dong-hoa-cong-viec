@@ -1,5 +1,7 @@
 # Tạo vòng lập lấy thông tin
 
+# Tạo vòng lập lấy thông tin
+
 import datetime
 import os
 import time
@@ -32,21 +34,20 @@ for name_file in list_file:
     path = os.path.join(thumuc_hienhanh,name_file)
 
     # dấu thời gian sửa đổi tập tin của một tập tin
-    m_time = os.path.getatime(path)  # ra một dãy số cần chuyển đổi dãy số này
+    m_time = os.path.getmtime(path)  # ra một dãy số cần chuyển đổi dãy số này
     # ngày chỉnh sửa cuối cùng
     dt_m = datetime.datetime.fromtimestamp(m_time).strftime("%d/%m/%Y - %H:%M:%S")
 
 
     # lấy thời gian truy cập cuối cùng của tập tin
-    lan_cuoi = os.path.getatime(path)  # ra một dãy số cần chuyển đổi để lấy thông tin
+    a_time = os.path.getatime(path)  # ra một dãy số cần chuyển đổi để lấy thông tin
     # chuyển đổi thông tin ngày giờ
-    tg_lan_cuoi = time.strftime("%d/%m/%Y - %H:%M:%S", time.localtime(lan_cuoi))
+    dt_a = time.strftime("%d/%m/%Y - %H:%M:%S", time.localtime(a_time))
 
-
-    # ngày tạo file
-    dctime = os.path.getatime(path)
+    # ngày giờ tạo tập tin
+    c_time = os.path.getctime(path)
     # chuyển đổi định dạng ngày tạo file
-    drtime = time.strftime("%d/%m/%Y - %H:%M:%S", time.localtime(dctime))
+    dt_c = time.strftime("%d/%m/%Y - %H:%M:%S", time.localtime(c_time))
 
 
 
@@ -57,13 +58,11 @@ for name_file in list_file:
 
     sht.range("A" + str(row)).value = name_file
     sht.range("b" + str(row)).value = thumuc_hienhanh
-    sht.range("d" + str(row)).value = drtime
-    sht.range("e" + str(row)).value = tg_lan_cuoi
-    sht.range("f" + str(row)).value = dt_m
+    sht.range("d" + str(row)).value = dt_m
+    sht.range("e" + str(row)).value = dt_a
+    sht.range("f" + str(row)).value = dt_c
     sht.range("g" + str(row)).value = size_new
     sht.range("H" + str(row)).value = "=HYPERLINK({0},{1})".format('"'+ path + '"','"Open"')
     sht.range("I" + str(row)).value = name_file
 
     row = row+1
-
-
