@@ -1,19 +1,32 @@
+import time
 import datetime
 import os
-import time
 
-# Đường dẫn 1 file trong thư mục
-path = r"H:\My Drive\HOCPYTHON excel\mo dau\SD\so_diem_khoi_10_mon_dia_li.xls"
+path = r"D:\lap trinh python\IA\SD\so_diem_khoi_10_mon_dia_li.xls"
 
-# dấu thời gian sửa đổi tập tin của một tập tin
-m_time = os.path.getatime(path)
-# đổi thông tin ra ngày giờ
-dt_m = datetime.datetime.fromtimestamp(m_time).strftime("%d/%m/%Y, %H:%M:%S")
-print(dt_m)
+# file modification timestamp of a file
+# dấu thời gian sửa đổi tệp của tệp
+m_time = os.path.getmtime(path)
+# convert timestamp into DateTime object
+#chuyển đổi dấu thời gian thành đối tượng DateTime
+dt_m = datetime.datetime.fromtimestamp(m_time).strftime("%d/%m/%Y-%H:%M:%S")
+print('Modified on:', dt_m)
 
-# lấy thời gian truy cập cuối cùng của tập tin
-lan_cuoi = os.path.getatime(path)
-print(lan_cuoi)
-# chuyển đổi thông tin ngày giờ
-thoigian_lan_cuoi = time.strftime("%d/%m/%Y, %H:%M:%S", time.localtime(lan_cuoi))
-print(thoigian_lan_cuoi)
+# file creation timestamp in float
+# Thời gian tạo file
+c_time = os.path.getctime(path)
+# convert creation timestamp into DateTime object
+dt_c = datetime.datetime.fromtimestamp(c_time).strftime("%d/%m/%Y-%H:%M:%S")
+print('Created on:', dt_c)
+
+# file accessed timestamp in float
+# Thời gian truy cập file cuối cùng
+a_time = os.path.getatime(path)
+# convert creation timestamp into DateTime object
+dt_a = datetime.datetime.fromtimestamp(a_time).strftime("%d/%m/%Y-%H:%M:%S")
+print('Accessed on:', dt_a)
+
+# get size of file
+# lấy dung lượng file
+size = os.path.getsize(path)
+print("Size file: ", round(size/1024,2), "KB")
